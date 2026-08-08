@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: craftmindai-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: craftmindai-server
+  template:
+    metadata:
+      labels:
+        app: craftmindai-server
+    spec:
+      containers:
+        - name: craftmindai-server
+          image: craftmindai-server:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - secretRef:
+                name: server-env-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: craftmindai-server-service
+spec:
+  selector:
+    app: craftmindai-server
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: ClusterIP

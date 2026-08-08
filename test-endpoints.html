@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CraftMindAI Endpoint Tester</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 25px;
+            background: #09090b;
+            color: #f4f4f5;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .test-section {
+            background: rgba(24, 24, 27, 0.6);
+            border: 1px solid #27272a;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(12px);
+        }
+        h2 {
+            font-size: 16px;
+            margin-top: 0;
+            color: #e4e4e7;
+        }
+        .result {
+            background: #09090b;
+            border: 1px solid #27272a;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 12px 0 0 0;
+            white-space: pre-wrap;
+            font-family: ui-monospace, monospace;
+            font-size: 11px;
+            color: #a1a1aa;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .success { border-left: 4px solid #22c55e; color: #4ade80; }
+        .error { border-left: 4px solid #ef4444; color: #f87171; }
+        .info { border-left: 4px solid #3b82f6; color: #60a5fa; }
+        
+        button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #1d4ed8; }
+        button:disabled { background: #52525b; cursor: not-allowed; }
+        
+        input[type="file"], input[type="text"] {
+            background: #18181b;
+            border: 1px solid #3f3f46;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin: 5px 0 12px 0;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus, input[type="file"]:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        .config-box {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .config-box input {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚀 CraftMindAI Endpoint Tester</h1>
+    
+    <div class="config-box test-section">
+        <label for="apiBaseInput" style="font-size: 13px; font-weight: 500; white-space: nowrap;">API Base URL:</label>
+        <input type="text" id="apiBaseInput" value="http://localhost:3000/api/ai">
+    </div>
+
+    <div class="test-section">
+        <h2>📁 Test 1: Remove Image Object</h2>
+        <label style="font-size: 12px; color: #a1a1aa;">Select Image:</label>
+        <input type="file" id="objectImage" accept="image/*">
+        <label style="font-size: 12px; color: #a1a1aa;">Object Name:</label>
+        <input type="text" id="objectToRemove" placeholder="e.g., car, tree">
+        <button id="btnObject" onclick="testRemoveObject()">Test Remove Object</button>
+        <div id="objectResult" class="result info">Status: Waiting for action...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Test 2: Remove Background</h2>
+        <label style="font-size: 12px; color: #a1a1aa;">Select Image:</label>
+        <input type="file" id="backgroundImage" accept="image/*">
+        <button id="btnBg" onclick="testRemoveBackground()">Test Remove Background</button>
+        <div id="backgroundResult" class="result info">Status: Waiting for action...</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔧 Test 3: Server Status</h2>
+        <button id="btnServer" onclick="testServerStatus()">Check Server Status</button>
+        <div id="serverResult" class="result info">Status: Checking connection...</div>
+    </div>
+
+    <script>
+        function getApiBase() {
+            return document.getElementById('apiBaseInput').value.trim();
+        }
+
+        function logResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const timestamp = new Date().toLocaleTimeString();
+            element.className = `result ${type}`;
+            element.textContent = `[${timestamp}] \n${message}`;
+        }
+
+        async function testRemoveObject() {
+            const fileInput = document.getElementById('objectImage');
+            const objectInput = document.getElementById('objectToRemove');
+            const btn = document.getElementById('btnObject');
+            const file = fileInput.files[0];
+            const object = objectInput.value.trim();
+
+            if (!file) {
+                logResult('objectResult', '❌ Please select an image file', 'error');
+                return;
+            }
+            if (!object) {
+                logResult('objectResult', '❌ Please enter an object to remove', 'error');
+                return;
+            }
+
+            logResult('objectResult', '🔄 Sending request to remove-image-object...', 'info');
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('image', file);
+                formData.append('object', object);
+
+                const response = await fetch(`${getApiBase()}/remove-image-object`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    logResult('objectResult', 
+                        `✅ SUCCESS!\nStatus: ${response.status}\nMessage: ${data.message || 'Done'}\nResponse:\n${JSON.stringify(data, null, 2)}`, 
+                        'success'
+                    );
+                } else {
+                    logResult('objectResult', 
+                        `❌ ERROR!\nStatus: ${response.status}\nError: ${data.message || data.error || 'Unknown error'}`, 
+                        'error'
+                    );
+                }
+            } catch (error) {
+                logResult('objectResult', `❌ NETWORK ERROR:\n${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function testRemoveBackground() {
+            const fileInput = document.getElementById('backgroundImage');
+            const btn = document.getElementById('btnBg');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                logResult('backgroundResult', '❌ Please select an image file', 'error');
+                return;
+            }
+
+            logResult('backgroundResult', '🔄 Sending request to remove-image-background...', 'info');
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData();
+                formData.append('image', file);
+
+                const response = await fetch(`${getApiBase()}/remove-image-background`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                
+                if (response.ok && data.success) {
+                    logResult('backgroundResult', 
+                        `✅ SUCCESS!\nStatus: ${response.status}\nMessage: ${data.message || 'Done'}\nResponse:\n${JSON.stringify(data, null, 2)}`, 
+                        'success'
+                    );
+                } else {
+                    logResult('backgroundResult', 
+                        `❌ ERROR!\nStatus: ${response.status}\nError: ${data.message || data.error || 'Unknown error'}`, 
+                        'error'
+                    );
+                }
+            } catch (error) {
+                logResult('backgroundResult', `❌ NETWORK ERROR:\n${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        }
+
+        async function testServerStatus() {
+            logResult('serverResult', '🔄 Checking server status...', 'info');
+
+            try {
+                const response = await fetch(`${getApiBase()}/test-upload`, {
+                    method: 'POST',
+                    body: new FormData()
+                });
+
+                if (response.status !== 404) {
+                    logResult('serverResult', `✅ SERVER IS RUNNING!\nStatus Code: ${response.status}`, 'success');
+                } else {
+                    logResult('serverResult', `⚠️ Server reachable, but endpoint '/test-upload' returned 404.`, 'error');
+                }
+            } catch (error) {
+                logResult('serverResult', `❌ SERVER NOT REACHABLE!\nError: ${error.message}\nMake sure backend is running.`, 'error');
+            }
+        }
+
+        window.onload = function() {
+            setTimeout(testServerStatus, 500);
+        };
+    </script>
+</body>
+</html>
