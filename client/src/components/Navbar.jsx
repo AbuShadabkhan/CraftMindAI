@@ -18,7 +18,7 @@ const Navbar = () => {
       <img 
        src={logo} 
        alt="CraftMindAI Logo" 
-       className="h-16 sm:h-20 w-auto cursor-pointer object-contain hover:scale-105 transition-transform duration-300" 
+       className="h-10 sm:h-16 w-auto cursor-pointer object-contain hover:scale-105 transition-transform duration-300" 
        onClick={() => navigate('/')} 
       />
       
@@ -26,7 +26,7 @@ const Navbar = () => {
         user ? (
           <UserButton />
         ) : (
-          <Button onClick={openSignIn} className='btn-primary max-sm:w-full'>
+          <Button onClick={openSignIn} className='btn-primary flex items-center justify-center gap-2 px-4 sm:px-6 py-2 text-sm sm:text-base'>
             Get started <HiArrowRight className='w-4 h-4' />
           </Button>
         )

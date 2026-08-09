@@ -1,3 +1,4 @@
+import React from 'react';
 import { assets } from "../assets/assets";
 import gradientBackground from '../assets/pattern.png';
 
@@ -76,24 +77,28 @@ const Testimonial = () => {
       className="bg-black/95 bg-blend-overlay w-full"
       style={{ backgroundImage: `url(${gradientBackground})` }}
     >
-      <div className="w-full bg-black px-4 sm:px-20 xl:px-32 py-24 overflow-hidden hover:paused">
-        <div className="text-center">
-          <h2 className="text-white text-4xl md:text-[42px] font-bold">
+      {/* 🚀 FIX 1: 'bg-black' hataya taaki parent ka pattern dikhe. Padding mobile ke hisaab se adjust ki */}
+      <div className="w-full bg-transparent py-16 lg:py-24 overflow-hidden hover:paused">
+        
+        {/* 🚀 FIX 2: Side padding (px-4) ab sirf text container par hai */}
+        <div className="text-center px-4 sm:px-20 xl:px-32 max-w-5xl mx-auto">
+          <h2 className="text-white text-3xl sm:text-4xl md:text-[42px] font-bold">
             Loved by Creators
           </h2>
-          <p className="text-neutral-400 max-w-lg mx-auto mt-3">
+          <p className="text-neutral-400 text-sm sm:text-base max-w-lg mx-auto mt-3">
             Don&apos;t just take our word for it. Here&apos;s what our users are saying.
           </p>
         </div>
 
         {/* Scrolling container */}
-        <div className="relative mt-12 group">
-          <div className="flex gap-6 animate-scroll group-hover:pause-animation">
+        <div className="relative mt-10 sm:mt-12 group">
+          <div className="flex gap-4 sm:gap-6 animate-scroll group-hover:pause-animation">
             {/* Duplicate testimonials for infinite loop */}
             {[...testimonials, ...testimonials].map((t, index) => (
               <div
                 key={index}
-                className="p-6 w-[300px] flex-shrink-0 rounded-xl bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md shadow-lg border border-zinc-800 hover:border-zinc-600 transition-colors duration-300"
+                // 🚀 FIX 3: Mobile par width w-[280px] kar di, aur laptop par w-[300px]
+                className="p-5 sm:p-6 w-[280px] sm:w-[300px] flex-shrink-0 rounded-xl bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md shadow-lg border border-zinc-800 hover:border-zinc-600 transition-colors duration-300"
               >
                 {/* Rating */}
                 <div className="flex items-center gap-1">
@@ -121,7 +126,7 @@ const Testimonial = () => {
                 <div className="flex items-center gap-3">
                   <img
                     src={t.image}
-                    className="w-12 h-12 object-cover rounded-full border border-zinc-700"
+                    className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-full border border-zinc-700"
                     alt={t.name}
                   />
                   <div className="text-sm text-white">

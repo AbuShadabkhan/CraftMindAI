@@ -26,8 +26,9 @@ const AiTools = () => {
       className="bg-black/95 bg-blend-overlay w-full"
       style={{ backgroundImage: `url(${gradientBackground})` }}
     >
-      <div className="px-4 sm:px-10 xl:px-24 2xl:px-28 py-24">
-        <div className="text-center mb-16 mx-auto">
+      {/* Container Padding Set */}
+      <div className="px-4 sm:px-6 md:px-10 xl:px-24 2xl:px-28 py-24 mx-auto max-w-7xl">
+        <div className="text-center mb-12 sm:mb-16 mx-auto">
           <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mx-auto">
             Powerful AI Tools at Your Fingertips
           </h2>
@@ -36,7 +37,8 @@ const AiTools = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+        {/* 🚀 FIX: Grid aur Card Width ko perfect responsive banaya */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 justify-items-center w-full">
           {AiToolsData.map((tool, index) => {
             const { icon: Icon, color } = iconMap[tool.title] || { icon: Wand2, color: "text-zinc-400" };
 
@@ -44,7 +46,8 @@ const AiTools = () => {
               <div
                key={index}
                onClick={() => user && navigate(tool.path)}
-               className="w-[360px] max-sm:w-full min-h-46 bg-zinc-900/40 border border-zinc-800 backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:border-zinc-500 cursor-pointer p-6 flex flex-col items-start rounded-xl group transform-gpu will-change-transform"
+               // 🚀 FIX: 'w-[360px]' hatakar 'w-full' kiya aur 'max-w-sm' lagaya. Blur mobile se hataya (scroll performance).
+               className="w-full max-w-sm min-h-[300px] bg-zinc-900 lg:bg-zinc-900/40 border border-zinc-800 lg:backdrop-blur-md shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:border-zinc-500 cursor-pointer p-6 flex flex-col items-start rounded-xl group"
               >
                 
                 <div className="w-16 h-16 rounded-xl bg-zinc-800/50 flex items-center justify-center mb-4 
@@ -64,7 +67,7 @@ const AiTools = () => {
                 <p className="text-neutral-400 text-sm line-clamp-3 mb-5 leading-relaxed">{tool.description}</p>
 
                 {tool.team && (
-                  <div className="flex -space-x-3 mb-4">
+                  <div className="flex -space-x-3 mb-4 mt-auto">
                     {tool.team.map((member, idx) => (
                       <img
                         key={idx}
@@ -86,7 +89,9 @@ const AiTools = () => {
           })}
         </div>
       </div>
-      <div className="flex min-h-[400px] w-full items-end justify-center bg-transparent mt-10 mb-20">
+      
+      {/* 🚀 FIX: Overflow hide karne ke liye w-full aur padding lagayi */}
+      <div className="flex min-h-[300px] sm:min-h-[400px] w-full max-w-full overflow-hidden items-end justify-center bg-transparent mt-10 mb-20 px-4">
         <OrbitingCirclesGlobeDemo />
       </div>
     </div>

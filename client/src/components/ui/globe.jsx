@@ -5,7 +5,7 @@ export function Globe({ className = "" }) {
   const canvasRef = useRef(null);
   
   //  Ek state banate hain jo check karegi ki screen Laptop hai ya Mobile
-  const [isDesktop, setIsDesktop] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
 
   // 1. Screen size check karne ka logic
   useEffect(() => {
