@@ -13,16 +13,23 @@ console.log("  - ANDORAI_API_KEY length:", process.env.ANDORAI_API_KEY?.length |
 console.log("  - GEMINI_API_KEY exists:", !!process.env.GEMINI_API_KEY);
 console.log("  - CLIPDROP_API_KEY exists:", !!process.env.CLIPDROP_API_KEY);
 console.log("  - APILAYER_KEY exists:", !!process.env.APILAYER_KEY);
+
 import aiRouter from './routes/aiRoutes.js';
 import Cloudinary from './configs/cloudinary.js';
 import userRouter from './routes/userRoutes.js';
 
 const app = express();
 
-// ✅ initialize cloudinary
+// ✅ Trust Render's proxy so Express knows requests are HTTPS
+app.set('trust proxy', 1);
 
 app.use(cors());
 app.use(express.json());
+
+// ✅ Root route kept PUBLIC (before Clerk middleware) — health check / uptime pings
+app.get('/', (req, res) => {
+  res.send('Server is Live!');
+});
 
 // Conditionally enable Clerk only when keys are configured and look valid
 const hasValidClerkKeys =
@@ -44,10 +51,6 @@ if (hasValidClerkKeys) {
 
 app.use('/api/ai', aiRouter);
 app.use('/api/user', userRouter);
-
-app.get('/', (req, res) => {
-  res.send('Server is Live!');
-});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
