@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'; // (Agar use karte ho)
 
 // Ek central axios instance banaya
 const apiClient = axios.create({
-  baseURL: 'http://localhost:3000/api', // Apne backend ka URL yahan dalo
+  baseURL: `${import.meta.env.VITE_BASE_URL}/api`, //  ab env variable use ho raha hai
 });
 
 // 🛡️ GLOBAL ERROR CATCHER (Interceptor)
