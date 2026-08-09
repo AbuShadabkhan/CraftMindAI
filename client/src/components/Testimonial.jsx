@@ -93,7 +93,7 @@ const Testimonial = () => {
             {[...testimonials, ...testimonials].map((t, index) => (
               <div
                 key={index}
-                className="p-6 w-[300px] flex-shrink-0 rounded-xl bg-zinc-900/40 backdrop-blur-md shadow-lg border border-zinc-800 hover:border-zinc-600 transition-colors duration-300"
+                className="p-6 w-[300px] flex-shrink-0 rounded-xl bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md shadow-lg border border-zinc-800 hover:border-zinc-600 transition-colors duration-300"
               >
                 {/* Rating */}
                 <div className="flex items-center gap-1">

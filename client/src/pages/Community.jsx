@@ -99,7 +99,7 @@ const Community = () => {
           (creations || []).map((creation, index) => (
             <div
               key={index}
-              className="relative group rounded-2xl overflow-hidden border border-zinc-800/80 bg-zinc-950 shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:border-zinc-700 transition-all duration-300"
+              className="relative group rounded-2xl overflow-hidden border border-zinc-800/80 bg-zinc-950 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:border-zinc-700 transition-all duration-300"
             >
               {/* Image with fixed aspect ratio */}
               <div className="aspect-[3/4] w-full bg-zinc-900 overflow-hidden">

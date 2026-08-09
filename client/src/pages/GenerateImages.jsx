@@ -75,7 +75,7 @@ const GenerateImages = () => {
       {/* Left Column (Input Form) - Glassmorphism Dark */}
       <form
         onSubmit={onSubmitHandler}
-        className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+        className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
       >
         <div className="flex items-center gap-3 mb-6">
           <div className="bg-blue-500/10 p-2.5 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(37,99,235,0.15)]">
@@ -159,7 +159,7 @@ const GenerateImages = () => {
       </form>
 
       {/* Right Column (Generated Output) */}
-      <div className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900/40 backdrop-blur-md rounded-2xl border flex flex-col border-zinc-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+      <div className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border flex flex-col border-zinc-800/80 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
         <div className="flex items-center justify-between mb-4 pb-3 border-b border-zinc-800/80">
           <div className="flex items-center gap-2">
             <ImageIcon className="w-5 h-5 text-purple-400" />

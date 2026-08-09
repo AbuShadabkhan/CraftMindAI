@@ -161,7 +161,7 @@ const GenerateWebsite = () => {
       {/* Form Section - Glassmorphism Dark */}
       <form
         onSubmit={onSubmitHandler}
-        className="w-full max-w-4xl p-6 sm:p-8 bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex flex-col"
+        className="w-full max-w-4xl p-6 sm:p-8 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex flex-col"
       >
         <div className="flex items-center gap-3 mb-6">
           <div className="bg-blue-500/10 p-2.5 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(37,99,235,0.15)]">

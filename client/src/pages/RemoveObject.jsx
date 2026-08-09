@@ -214,7 +214,7 @@ const RemoveObject = () => {
     <div className="w-full min-h-full flex flex-col lg:flex-row items-start justify-center gap-6 sm:gap-8 p-4 sm:p-6 bg-transparent relative">
       
       {/* Left Column (Upload & Tools) */}
-      <div className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+      <div className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
         <div className="flex items-center gap-3 mb-6">
           <div className="bg-blue-500/10 p-2.5 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(37,99,235,0.15)]">
             <Scissors className="w-6 h-6 text-blue-400" />
@@ -318,7 +318,7 @@ const RemoveObject = () => {
       </div>
 
       {/* Right Column (Result Output) */}
-      <div className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900/40 backdrop-blur-md rounded-2xl border flex flex-col border-zinc-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)] min-h-[450px]">
+      <div className="w-full lg:w-1/2 max-w-xl p-6 sm:p-8 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border flex flex-col border-zinc-800/80 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)] min-h-[450px]">
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-zinc-800/80">
           <div className="flex items-center gap-2">
             <Scissors className="w-5 h-5 text-purple-400" />

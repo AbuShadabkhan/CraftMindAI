@@ -77,7 +77,7 @@ const Dashboard = () => {
       <div className="flex justify-start gap-5 flex-wrap">
         
         {/* Total Creations card */}
-        <div className="flex justify-between items-center w-72 p-5 px-6 bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-zinc-800/80 hover:bg-zinc-900/60 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+        <div className="flex justify-between items-center w-72 p-5 px-6 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border border-zinc-800/80 hover:bg-zinc-900/60 transition-all duration-300 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
           <div>
             <p className="text-sm font-medium text-zinc-400 tracking-wide">
               <TotalCreations />
@@ -92,7 +92,7 @@ const Dashboard = () => {
         </div>
 
         {/* Active Plan card */}
-        <div className="flex justify-between items-center w-72 p-5 px-6 bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-zinc-800/80 hover:bg-zinc-900/60 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+        <div className="flex justify-between items-center w-72 p-5 px-6 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border border-zinc-800/80 hover:bg-zinc-900/60 transition-all duration-300 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
           <div>
             <p className="text-sm font-medium text-zinc-400 tracking-wide">
               <ActivePlan />
@@ -131,7 +131,7 @@ const Dashboard = () => {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {creditStats.map((stat, index) => (
-                  <div key={index} className="p-4 bg-zinc-900/40 backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:border-zinc-700 transition-colors">
+                  <div key={index} className="p-4 bg-zinc-900 lg:bg-zinc-900/40 lg:backdrop-blur-md rounded-2xl border border-zinc-800/80 shadow-md lg:shadow-[0_4px_20px_rgba(0,0,0,0.5)] hover:border-zinc-700 transition-colors">
                     <h2 className="text-md font-semibold text-white">{stat.name}</h2>
                     <p className="text-zinc-400 text-xs mt-1">Credits left today</p>
                     
